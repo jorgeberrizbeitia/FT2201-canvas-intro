@@ -81,3 +81,80 @@ ctx.fillText( "HOLA", 300, 300 )
 
 // syntax
 // ctx.fillText( texto, posX, posY )
+
+
+
+// imagenes en canvas
+
+let img = new Image()
+img.src = "https://tinyurl.com/ironhack-pokemons/39.svg"
+
+let img2 = new Image()
+img2.src = "https://tinyurl.com/ironhack-pokemons/133.svg"
+
+// para evitar bugs
+img.addEventListener("load", () => {
+  ctx.drawImage(img, 300, 360) // si los omitimos dibuja en tamaño original
+})
+
+img2.addEventListener("load", () => {
+  ctx.drawImage(img2, 400, 360, 80, 100)
+})
+
+
+
+
+
+// 
+
+let controlVar = 0;
+
+let printSomething = () => {
+
+  console.log("WOOOOOO")
+
+  controlVar++
+
+  if( controlVar < 100) {
+    printSomething()
+  }
+
+}
+
+printSomething()
+
+
+
+// efecto de recursion para crear animaciones en canvas
+
+let boxPositionX = 50
+let boxPositionY = 720
+
+let controlBoxAnim = 0;
+
+let boxAnimation = () => {
+
+  // acciones
+  // 1. pantalla de borra
+  ctx.clearRect(0, 0, 600, 800)
+
+  // 2. elementos de mueven
+  boxPositionX += 3
+  boxPositionY--
+
+  // 3. elementos de dibujan
+  ctx.fillRect(boxPositionX, boxPositionY, 50, 50)
+  
+  
+  
+  // 4. todo de nuevo
+  controlBoxAnim++
+  if (boxPositionX < 300) {
+    // boxAnimation()
+    // requestAnimationFrame se utiliza para animaciones
+    requestAnimationFrame(boxAnimation) 
+  }
+
+}
+
+boxAnimation()
